@@ -1,0 +1,22 @@
+{
+    "name": "perspective/module-certification",
+    "description": "",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "email": "mozokevgen@gmail.com",
+            "name": "mozokevgen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Perspective\\Certification\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}
