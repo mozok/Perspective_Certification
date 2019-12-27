@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">perspective_certification_question_form.question_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button class="Perspective\Certification\Block\Adminhtml\Question\Edit\BackButton" name="back"/>
+			<button class="Perspective\Certification\Block\Adminhtml\Question\Edit\DeleteButton" name="delete"/>
+			<button class="Perspective\Certification\Block\Adminhtml\Question\Edit\SaveButton" name="save"/>
+			<button class="Perspective\Certification\Block\Adminhtml\Question\Edit\SaveAndContinueButton" name="save_and_continue"/>
+		</buttons>
+		<namespace>perspective_certification_question_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>perspective_certification_question_form.question_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="question_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider class="Perspective\Certification\Model\Question\DataProvider" name="question_form_data_source">
+			<settings>
+				<requestFieldName>question_id</requestFieldName>
+				<primaryFieldName>question_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label>General</label>
+		</settings>
+		<field name="type_id" formElement="select" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Question</item>
+				</item>
+                <item name="options" xsi:type="object">\Perspective\Certification\Model\Type\OptionProvider</item>
+			</argument>
+			<settings>
+				<dataType>string</dataType>
+				<label translate="true">Type</label>
+				<dataScope>type_id</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="description" formElement="textarea" sortOrder="30">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Question</item>
+				</item>
+			</argument>
+			<settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+				<dataType>text</dataType>
+				<label translate="true">Description</label>
+                <visible>true</visible>
+				<dataScope>description</dataScope>
+			</settings>
+		</field>
+        <dynamicRows name="answers">
+            <settings>
+                <deleteValue>true</deleteValue>
+                <addButtonLabel translate="true">Add Answer</addButtonLabel>
+                <additionalClasses>
+                    <class name="admin__field-wide">true</class>
+                </additionalClasses>
+                <componentType>dynamicRows</componentType>
+            </settings>
+            <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="answer_id" formElement="input" sortOrder="1">
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">true</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+                    <settings>
+                        <label translate="true">Id</label>
+                        <visible>false</visible>
+                        <dataType>text</dataType>
+                        <dataScope>answer_id</dataScope>
+                    </settings>
+                </field>
+<!--                <field name="answer_id" formElement="hidden">-->
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">true</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+<!--                </field>-->
+                <field name="description" formElement="textarea" sortOrder="10">
+<!--                    <argument name="data" xsi:type="array">-->
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">true</item>-->
+<!--                        </item>-->
+<!--                    </argument>-->
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>text</dataType>
+                        <label>Answer Description</label>
+                        <dataScope>description</dataScope>
+                    </settings>
+                </field>
+                <field name="is_true" formElement="select" sortOrder="20">
+                    <argument name="data" xsi:type="array">
+<!--                        <item name="config" xsi:type="array">-->
+<!--                            <item name="fit" xsi:type="boolean">true</item>-->
+<!--                        </item>-->
+                        <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">true</rule>
+                        </validation>
+                        <dataType>select</dataType>
+                        <label>Is True</label>
+                        <dataScope>is_true</dataScope>
+                    </settings>
+                </field>
+                <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete" sortOrder="100">
+                    <settings>
+                        <componentType>actionDelete</componentType>
+                        <dataType>text</dataType>
+                        <label>Actions</label>
+                        <additionalClasses>
+                            <class name="data-grid-actions-cell">true</class>
+                        </additionalClasses>
+                    </settings>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+	</fieldset>
+</form>

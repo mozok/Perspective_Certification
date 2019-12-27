@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+        <add id="Perspective_Certification::top_level"
+             title="Perspective Certification"
+             module="Perspective_Certification"
+             resource="Perspective_Certification::Top_level"
+             parent="Magento_Backend::content"
+             sortOrder="500"
+        />
+		<add action="perspective_certification/type/index"
+             id="Perspective_Certification::perspective_certification_type"
+             module="Perspective_Certification"
+             parent="Perspective_Certification::top_level"
+             resource="Perspective_Certification::Type"
+             sortOrder="10"
+             title="Type"
+        />
+		<add action="perspective_certification/question/index"
+             id="Perspective_Certification::perspective_certification_question"
+             module="Perspective_Certification"
+             parent="Perspective_Certification::top_level"
+             resource="Perspective_Certification::Question"
+             sortOrder="20"
+             title="Question"/>
+	</menu>
+</config>
