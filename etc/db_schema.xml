@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="perspective_certification_type" comment="Certification Type Table"
+           engine="innodb" resource="default">
+		<column name="type_id" comment="Entity Id" identity="true" nullable="false" xsi:type="int"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="type_id"/>
+		</constraint>
+		<column name="description" comment="Certification Type description" nullable="true" xsi:type="text"/>
+	</table>
+	<table name="perspective_certification_question" comment="Certification Questions Table"
+           engine="innodb" resource="default">
+		<column name="question_id" comment="Entity Id" identity="true" nullable="false" xsi:type="int"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="question_id"/>
+		</constraint>
+		<column name="type_id" comment="Certification Type Id" identity="false" nullable="true" xsi:type="int"/>
+		<column name="description" comment="Certification Question Description" nullable="true" xsi:type="text"/>
+		<column name="topic" comment="Certification Question topic/tag" length="255" nullable="true" xsi:type="varchar"/>
+        <constraint xsi:type="foreign" referenceId="FK_E42B71F90ED46AC30FE4FC3C76D6540A"
+                    table="perspective_certification_question" column="type_id"
+                    referenceTable="perspective_certification_type" referenceColumn="type_id" onDelete="SET NULL"
+        />
+	</table>
+	<table name="perspective_certification_answer" comment="Certification Answers Table"
+           engine="innodb" resource="default">
+		<column name="answer_id" comment="Entity Id" identity="true" nullable="false"
+                padding="6" unsigned="false" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="answer_id"/>
+		</constraint>
+		<column name="question_id" comment="Certification Question Id" identity="false" nullable="true" xsi:type="int"/>
+		<column name="description" comment="Certification Answer description" nullable="true" xsi:type="text"/>
+		<column name="is_true" comment="Is Certification Answer true" nullable="true" xsi:type="boolean"/>
+        <constraint xsi:type="foreign" referenceId="FK_5E7D2595521499513D24580261AC0A75"
+                    table="perspective_certification_answer" column="question_id"
+                    referenceTable="perspective_certification_question" referenceColumn="question_id" onDelete="CASCADE"
+        />
+	</table>
+	<table name="perspective_certification_result" comment="Certification Results Table"
+           engine="innodb" resource="default">
+		<column name="result_id" comment="Entity Id" identity="true" nullable="false"
+                padding="6" unsigned="false" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="result_id"/>
+		</constraint>
+		<column name="answers" nullable="true" xsi:type="text"/>
+		<column name="score" nullable="true" xsi:type="text"/>
+	</table>
+</schema>

@@ -1,0 +1,45 @@
+{
+    "perspective_certification_type": {
+        "column": {
+            "type_id": true,
+            "description": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "perspective_certification_question": {
+        "column": {
+            "question_id": true,
+            "type_id": true,
+            "description": true,
+            "topic": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_E42B71F90ED46AC30FE4FC3C76D6540A": true
+        }
+    },
+    "perspective_certification_answer": {
+        "column": {
+            "answer_id": true,
+            "question_id": true,
+            "description": true,
+            "is_true": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_5E7D2595521499513D24580261AC0A75": true
+        }
+    },
+    "perspective_certification_result": {
+        "column": {
+            "result_id": true,
+            "answers": true,
+            "score": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
