@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Service Interfaces Preference -->
+    <preference for="Perspective\Certification\Api\TypeRepositoryInterface"
+                type="Perspective\Certification\Model\TypeRepository"/>
+	<preference for="Perspective\Certification\Api\Data\TypeInterface"
+                type="Perspective\Certification\Model\Data\Type"/>
+	<preference for="Perspective\Certification\Api\Data\TypeSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Perspective\Certification\Api\QuestionRepositoryInterface"
+                type="Perspective\Certification\Model\QuestionRepository"/>
+    <preference for="Perspective\Certification\Api\Data\QuestionInterface"
+                type="Perspective\Certification\Model\Data\Question"/>
+    <preference for="Perspective\Certification\Api\Data\QuestionSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Perspective\Certification\Api\AnswerRepositoryInterface"
+                type="Perspective\Certification\Model\AnswerRepository"/>
+    <preference for="Perspective\Certification\Api\Data\AnswerInterface"
+                type="Perspective\Certification\Model\Data\Answer"/>
+    <preference for="Perspective\Certification\Api\Data\AnswerSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Perspective\Certification\Api\ResultRepositoryInterface"
+                type="Perspective\Certification\Model\ResultRepository"/>
+    <preference for="Perspective\Certification\Api\Data\ResultInterface"
+                type="Perspective\Certification\Model\Data\Result"/>
+    <preference for="Perspective\Certification\Api\Data\ResultSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults"/>
+
+    <!-- Admin Menu Grid Configuration -->
+    <virtualType name="Perspective\Certification\Model\ResourceModel\Type\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">perspective_certification_type</argument>
+			<argument name="resourceModel" xsi:type="string">Perspective\Certification\Model\ResourceModel\Type\Collection</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Perspective\Certification\Model\ResourceModel\Question\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">perspective_certification_question</argument>
+			<argument name="resourceModel" xsi:type="string">Perspective\Certification\Model\ResourceModel\Question\Collection</argument>
+		</arguments>
+	</virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="perspective_certification_type_listing_data_source" xsi:type="string">Perspective\Certification\Model\ResourceModel\Type\Grid\Collection</item>
+                <item name="perspective_certification_question_listing_data_source" xsi:type="string">Perspective\Certification\Model\ResourceModel\Question\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
