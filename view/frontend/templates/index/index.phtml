@@ -1,0 +1,20 @@
+<?php
+/** @var \Perspective\Certification\Block\Index\Index $block */
+
+$certificationTypes = $block->getCertificationTypes();
+?>
+<div class="certification-wrapper">
+    <ul class="certification-types">
+        <?php foreach ($certificationTypes as $certificationType): ?>
+            <li class="certification-type">
+                <div>
+                    <span class="description"><?= __($certificationType->getDescription()); ?></span>
+                    <a class="button" href="<?= $block->getQuizUrl($certificationType->getTypeId()); ?>">
+                        <?= __('Select'); ?>
+                    </a>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
